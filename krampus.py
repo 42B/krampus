@@ -52,26 +52,11 @@ class Krampus():
 
 def main(event, context):
     # collect our run information, otherwise just give it something I guess
-    if os.getenv("DEFAULT_REGION"):
-        region = os.getenv("DEFAULT_REGION")
-    else:
-        region = "us-east-1"
-    if os.getenv("KRAMPUS_BUCKET"):
-        krampus_bucket = os.getenv("KRAMPUS_BUCKET")
-    else:
-        krampus_bucket = "krampus-dev"
-    if os.getenv("TASKS_FILE_KEY"):
-        tasks_file_key = os.getenv("TASKS_FILE_KEY")
-    else:
-        tasks_file_key = "tasks.json"
-    if os.getenv("ARN_WHITELIST"):
-        whitelist = os.getenv("ARN_WHITELIST")
-    else:
-        whitelist = None
-    if os.getenv("KRAMPUS_ROLE_NAME"):
-        krampus_role = os.getenv("KRAMPUS_ROLE_NAME")
-    else:
-        krampus_role = "krampus"
+    region = os.getenv("DEFAULT_REGION", "us-east-1")
+    krampus_bucket = os.getenv("KRAMPUS_BUCKET", "krampus-dev")
+    tasks_file_key = os.getenv("TASKS_FILE_KEY", "tasks.json")
+    whitelist = os.getenv("ARN_WHITELIST")
+    krampus_role = os.getenv("KRAMPUS_ROLE_NAME", "krampus")
     # fire it all up
     k = Krampus(region, krampus_bucket, tasks_file_key, whitelist, krampus_role)
     k.getTasks()
