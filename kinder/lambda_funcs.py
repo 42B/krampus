@@ -5,6 +5,8 @@
 ###############################################################################
 # TODO:
 ###############################################################################
+import sys
+
 from lib.krampus_logging import KLog
 
 
@@ -14,7 +16,7 @@ class Lambda():
             self.conn = sess.client("lambda", region_name=region)
         except Exception as e:
             KLog.log("issue connecting to AWS %s" % str(e), "critical")
-            exit("[!] issue connecting to AWS: %s" % str(e))
+            sys.exit("[!] issue connecting to AWS: %s" % str(e))
         # get volume reference
         self.func = func_name
         self.region = region

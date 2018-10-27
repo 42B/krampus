@@ -4,22 +4,23 @@
 # TODO:
 # all these tasks should return a status to krampus.py
 ###############################################################################
+import json
+import sys
+import time
+
 import boto3
 from botocore.exceptions import ClientError
-import json
-import time
-import sys
 
+from kinder import ebs
 # our stuff
 from kinder import ec2
 from kinder import iam
+from kinder import lambda_funcs
 from kinder import rds
 from kinder import s3
 from kinder import security_group
-from kinder import ebs
-from kinder import lambda_funcs
-from lib.krampus_logging import KLog
 from lib.aws_sessions import KSession
+from lib.krampus_logging import KLog
 
 # not sure what keys will be passed, but I do know how what krampus wants
 KEYS = {
@@ -240,7 +241,7 @@ class KTask():
             self.json_data = json.load(self.bucket.Object(key).get()['Body'])
         except ClientError as e:
             KLog.log("failed to download tasks file: %s" % str(e), "critical")
-            exit()
+            sys.exit()
         for job in self.json_data['tasks']:
             # resolve the arn
             arn_obj = KTask.ARN(job[KEYS['arn']])

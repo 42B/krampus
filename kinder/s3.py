@@ -7,6 +7,8 @@
 ###############################################################################
 # TODO:
 ###############################################################################
+import sys
+
 from lib.krampus_logging import KLog
 
 
@@ -16,7 +18,7 @@ class S3():
             self.conn = sess.resource("s3", region_name=region)
         except:
             KLog.log("issue connecting to AWS", "critical")
-            exit("[!] issue connecting to AWS")
+            sys.exit("[!] issue connecting to AWS")
         # set it - as far as krampus is concerned the acls are the bucket
         self.bucket = self.conn.BucketAcl(bucket_name)
 

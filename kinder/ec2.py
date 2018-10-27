@@ -5,6 +5,8 @@
 ###############################################################################
 # TODO:
 ###############################################################################
+import sys
+
 from botocore.exceptions import ClientError
 
 from lib.krampus_logging import KLog
@@ -16,7 +18,7 @@ class EC2():
             self.conn = sess.resource("ec2", region)
         except Exception as e:
             KLog.log("issue connecting to AWS %s" % str(e), "critical")
-            exit("[!] issue connecting to AWS: %s" % str(e))
+            sys.exit("[!] issue connecting to AWS: %s" % str(e))
         # set it
         self.instance = self.getInstanceByID(instance_id)
         # verify the instance

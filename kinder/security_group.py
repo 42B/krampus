@@ -4,7 +4,10 @@
 # TODO:
 # no ipv6 support
 ###############################################################################
+import sys
+
 from botocore.exceptions import ClientError
+
 from lib.krampus_logging import KLog
 
 
@@ -20,7 +23,7 @@ class SecurityGroup():
             self.group = False
         except:
             KLog.log("issue connecting to AWS", "critical")
-            exit("[!] issue connecting to AWS")
+            sys.exit("[!] issue connecting to AWS")
 
     # see if there is a specified range in this rule
     def hasRange(self, rules, cidr_range):

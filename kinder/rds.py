@@ -6,6 +6,8 @@
 # TODO:
 # add more disable groups/rules
 ###############################################################################
+import sys
+
 from lib.krampus_logging import KLog
 
 
@@ -15,7 +17,7 @@ class RDS():
             self.conn = sess.client('rds', region_name=region)
         except:
             KLog.log("issue connecting to AWS", "critical")
-            exit("[!] issue connecting to AWS")
+            sys.exit("[!] issue connecting to AWS")
         # set it
         self.name = instance_name
         self.disable_groups = ['sg-c6d41cae']

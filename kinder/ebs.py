@@ -8,6 +8,7 @@
 ###############################################################################
 # TODO:
 ###############################################################################
+import sys
 from re import search
 
 from kinder.ec2 import EC2  # need to work with instance parents
@@ -20,7 +21,7 @@ class EBS():
             self.conn = sess.resource("ec2", region_name=region)
         except Exception as e:
             KLog.log("issue connecting to AWS %s" % str(e), "critical")
-            exit("[!] issue connecting to AWS: %s" % str(e))
+            sys.exit("[!] issue connecting to AWS: %s" % str(e))
         # get volume reference
         self.volume = self.conn.Volume(volume_id)
         self.region = region
